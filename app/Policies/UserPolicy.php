@@ -34,14 +34,6 @@ class UserPolicy
                 return true;
                 break;
 
-            case $user->hasRole(['LEADER']):
-                return $user->project_id == $model->project_id;
-                break;
-
-            case $user->hasRole('WORKER'):
-                return $user->project_id == $model->project_id;
-                break;
-
             case $user->hasRole('CLIENT'):
                 return $user->project_id == $model->project_id;
                 break;

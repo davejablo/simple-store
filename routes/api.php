@@ -37,6 +37,10 @@ Route::group(['prefix' => 'v1'], function () {
         Route::group(['prefix' => 'profiles'], function () {
         });
 
+        Route::resource('suppliers', 'SupplierController');
+        Route::group(['prefix' => 'suppliers'], function () {
+        });
+
         Route::resource('categories', 'CategoryController');
         Route::group(['prefix' => 'categories'], function () {
             Route::get('/{category}', 'CategoryController@show');
@@ -51,6 +55,5 @@ Route::group(['prefix' => 'v1'], function () {
         });
 
             Route::post('logout', 'AuthController@logout');
-
     });
 });

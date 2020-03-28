@@ -2,7 +2,11 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Category;
+use App\Order;
+use App\Product;
 use App\Project;
+use App\Supplier;
 use App\Task;
 use App\User;
 use App\UserProfile;
@@ -39,3 +43,50 @@ $factory->define(UserProfile::class, function (Faker $faker) {
         'birth_date' => $faker->dateTimeThisCentury(),
     ];
 });
+
+$factory->define(Category::class, function (Faker $faker) {
+
+    return [
+        'name' => $faker->word,
+        'description' => $faker->sentence,
+    ];
+});
+
+$factory->define(Supplier::class, function (Faker $faker) {
+
+    return [
+        'company_name' => $faker->company,
+        'country' => $faker->country,
+        'city' => $faker->city,
+        'state' => $faker->state,
+        'postcode' => $faker->postcode,
+        'address' => $faker->address,
+        'phone' => $faker->phoneNumber,
+        'email' => $faker->email,
+    ];
+});
+
+$factory->define(Product::class, function (Faker $faker) {
+    $categories = Category::all()->pluck('id');
+    $products = Supplier::all()->pluck('id');
+
+    return [
+        'name' => $faker->word,
+        'description' => $faker->sentence,
+        'barcode' => Str::random(10),
+        'category_id' => rand($categories->first(), $categories->last()),
+        'supplier_id' => rand($products->first(), $products->last()),
+        'unit_price' => rand(5, 9999.99),
+        'in_stock' => rand(0, 100)
+    ];
+});
+
+//$factory->define(Order::class, function (Faker $faker) {
+//    $users = User::all()->pluck('id');
+//
+//    return [
+//        'user_id' => rand($users->first(), $users->last()),
+//        'status' => $faker->word,
+//        'method' => $faker->text,
+//    ];
+//});
