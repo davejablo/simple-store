@@ -81,12 +81,12 @@ $factory->define(Product::class, function (Faker $faker) {
     ];
 });
 
-//$factory->define(Order::class, function (Faker $faker) {
-//    $users = User::all()->pluck('id');
-//
-//    return [
-//        'user_id' => rand($users->first(), $users->last()),
-//        'status' => $faker->word,
-//        'method' => $faker->text,
-//    ];
-//});
+$factory->define(Order::class, function (Faker $faker) {
+    $users = User::all()->pluck('id');
+
+    return [
+        'user_id' => rand($users->first(), $users->last()),
+        'status' => $faker->word,
+        'method' => $faker->text,
+    ];
+});
